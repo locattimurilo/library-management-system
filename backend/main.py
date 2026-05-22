@@ -3,20 +3,11 @@ from flask_cors import CORS
 import uuid
 
 app = Flask(__name__)
-
-app.config.from_object(__name__)
-
-# Permite todas as origens (para desenvolvimento)
-CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
-
-# OU permite apenas o frontend Vue (mais seguro)
-CORS(app, resources={r"/*": {"origins": "http://localhost:8080"}},
-     allow_headers=["Content-Type", "Authorization"],
-     supports_credentials=True)
+CORS(app)
 
 @app.route('/', methods=['GET'])
 def saudacoes():
-    return("Esta é a API da biblioteca.")
+    return "Esta é a API da biblioteca."
 
 ITENS = [
     {'id': uuid.uuid4().hex, 'title': 'Guerra e Paz', 'genre': 'Histórico', 'available': False},
@@ -61,7 +52,7 @@ def item_individual(item_id):
         objeto_resposta['message'] = 'Item Atualizado!'
     if request.method == 'DELETE':
         remover_item(item_id)
-        objeto_resposta['message'] = 'Item Removido!️'
+        objeto_resposta['message'] = 'Item Removido!'
     return jsonify(objeto_resposta)
 
 def remover_item(item_id):
