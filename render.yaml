@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: library-backend
+    env: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn main:app
+    envVars:
+      - key: FLASK_ENV
+        value: production
+
+  - type: web
+    name: library-frontend
+    env: node
+    rootDir: frontend/frontend
+    buildCommand: npm install && npm run build
+    startCommand: npx serve -s dist -l 3000
+    envVars:
+      - key: NODE_VERSION
+        value: 16
