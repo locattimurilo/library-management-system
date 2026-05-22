@@ -184,7 +184,7 @@
 
 <script>
 import axios from "axios";
-const API_URL = "https://library-management-system-r6cw.onrender.com/itens";
+const API_URL = "https://library-management-system-4csa.onrender.com/itens";
 export default {
   data() {
     return {
